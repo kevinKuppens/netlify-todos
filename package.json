@@ -4,15 +4,17 @@
     "dev:front": "vite",
     "dev:back": "cd server && node index.js",
     "dev": "npm-run-all --parallel dev:*",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode production",
     "serve": "vite preview",
     "e2e:open": "cypress open",
     "e2e:run": "cypress run",
-    "test" : "start-server-and-test 'yarn dev' http://localhost:8000 'yarn e2e:open'"
+    "test": "start-server-and-test 'yarn dev' http://localhost:8000 'yarn e2e:open'",
+    "deploy:back": "git subtree push --prefix server heroku master"
   },
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "dotenv": "^10.0.0",
     "use-reducer-async": "^2.0.1"
   },
   "devDependencies": {
@@ -23,6 +25,7 @@
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "autoprefixer": "^10.2.6",
     "cypress": "^7.6.0",
+    
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.5",
     "start-server-and-test": "^1.12.6",

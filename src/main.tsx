@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { StateProvider } from './Store'
+import dotenv from 'dotenv'
 
 ReactDOM.render(
   <React.StrictMode>

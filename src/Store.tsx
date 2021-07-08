@@ -2,6 +2,7 @@ import React, { ContextType, createContext, PropsWithChildren, useReducer } from
 import { useReducerAsync } from "use-reducer-async";
 import { Context, State, Action } from "./types";
 
+
 const initialStoreContext: Context = {
     state: {
         todos: [],
@@ -27,7 +28,7 @@ const asyncActionHandler: any = {
             headers: baseHeaders
         }
         try {
-            const response = await fetch('http://localhost:8000/tags', fetchSetting);
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/tags`, fetchSetting);
             const tags = await response.json();
             console.table(tags)
             dispatch({ type: 'SET_TAGS', payload: tags });
@@ -36,13 +37,12 @@ const asyncActionHandler: any = {
         }
     },
     FETCHTODOS: ({ dispatch }: { dispatch: ({ }: Action) => {} }) => async (action: Action) => {
-        console.log('FETCHTODOS');
         const fetchSetting = {
             method: 'GET',
             headers: baseHeaders
         }
         try {
-            const response = await fetch('http://localhost:8000/todos?_expand=tags', fetchSetting);
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/todos?_expand=tags`, fetchSetting);
             const todos = await response.json();
             console.table(todos)
             dispatch({ type: 'SET_TODOS', payload: todos });
@@ -59,7 +59,7 @@ const asyncActionHandler: any = {
             body: JSON.stringify(action.payload.value)
         }
         try {
-            const response = await fetch('http://localhost:8000/todos', fetchSetting);
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/todos`, fetchSetting);
             console.log(response);
             if (!response.ok) {
                 console.log('ERROR')
@@ -69,7 +69,7 @@ const asyncActionHandler: any = {
                         method: 'GET',
                         headers: baseHeaders
                     }
-                    const response = await fetch('http://localhost:8000/todos?_expand=tags', fetchSetting);
+                    const response = await fetch(`${import.meta.env.VITE_API_URI}/todos?_expand=tags`, fetchSetting);
                     const todos = await response.json();
                     console.table(todos)
                     dispatch({ type: 'SET_TODOS', payload: todos });
@@ -89,7 +89,7 @@ const asyncActionHandler: any = {
             headers: baseHeaders,
         }
         try {
-            const response = await fetch(`http://localhost:8000/todos/${action.payload.id}`, fetchSetting);
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/todos/${action.payload.id}`, fetchSetting);
             console.log(response);
             if (!response.ok) {
                 console.log('ERROR')
@@ -99,7 +99,7 @@ const asyncActionHandler: any = {
                         method: 'GET',
                         headers: baseHeaders
                     }
-                    const response = await fetch('http://localhost:8000/todos?_expand=tags', fetchSetting);
+                    const response = await fetch(`${import.meta.env.VITE_API_URI}/todos?_expand=tags`, fetchSetting);
                     const todos = await response.json();
                     console.table(todos)
                     dispatch({ type: 'SET_TODOS', payload: todos });
