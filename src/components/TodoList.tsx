@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { storeContext } from '../Store';
 import TodoItem from './TodoItems';
 import TodoForm from './TodoForm';
+import { RouteComponentProps } from '@reach/router';
 
-const TodoList = () => {
+const TodoList: FC<RouteComponentProps> = () => {
     const { state, dispatch } = useContext(storeContext);
 
     useEffect(() => {

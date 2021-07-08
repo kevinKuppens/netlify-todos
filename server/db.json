@@ -36,5 +36,16 @@
       "id": 5
     }
   ],
-  "users": []
+  "users": [
+    {
+      "email": "kev@gmail.com",
+      "password": "$2a$10$bvQtjQlgY0D2DxahQLsLR.rF7p9GCdgr755N/v1hD9NEqvvXL5gcW",
+      "id": 1
+    },
+    {
+      "email": "kevin@gmail.com",
+      "password": "$2a$10$HlTAYMOqNd0eyI2JTXTgwOJQYNU5wMst0HMJi7L2cCqkTg09SUS1.",
+      "id": 2
+    }
+  ]
 }

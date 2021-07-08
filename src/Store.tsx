@@ -1,12 +1,14 @@
 import React, { ContextType, createContext, PropsWithChildren, useReducer } from "react";
 import { useReducerAsync } from "use-reducer-async";
 import { Context, State, Action } from "./types";
-
+import { navigate } from "@reach/router";
 
 const initialStoreContext: Context = {
     state: {
         todos: [],
-        tags: []
+        tags: [],
+        jwt: '',
+        error: null
     },
     dispatch: (_a: any) => { }
 }
@@ -17,6 +19,13 @@ const reducer = (state: State, action: Action) => {
             return { ...state, todos: action.payload }
         case 'SET_TAGS':
             return { ...state, tags: action.payload }
+        case 'SET_JWT':
+            console.log('SET JWT');
+            navigate('/todos')
+            return { ...state, jwt: action.payload }
+        case 'SET_ERROR':
+            console.log('SETçERROR')
+            return { ...state, error: action.payload }
         default: return state;
     }
 }
@@ -110,7 +119,44 @@ const asyncActionHandler: any = {
         } catch (e) {
             console.log(e);
         }
-    }
+    },
+    REGISTER: ({ dispatch }: { dispatch: ({ }: Action) => {} }) => async (action: Action) => {
+        const fetchSetting = {
+            method: 'POST',
+            headers: baseHeaders,
+            body: JSON.stringify(action.payload)
+        }
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/signup`, fetchSetting);
+            console.log(response);
+            if (!response.ok) {
+                console.log('ERROR')
+            } else {
+                navigate('/')
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    LOGIN: ({ dispatch }: { dispatch: ({ }: Action) => {} }) => async (action: Action) => {
+        const fetchSetting = {
+            method: 'POST',
+            headers: baseHeaders,
+            body: JSON.stringify(action.payload)
+        }
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URI}/signin`, fetchSetting);
+            console.log(response);
+            if (!response.ok) {
+                const errorMsg = await response.text();
+                dispatch({ type: 'SET_ERROR', payload: errorMsg })
+            } else {
+                dispatch({ type: 'SET_JWT', payload: (await response.json()).accessToken })
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    },
 }
 const baseHeaders = {
     Accept: 'application/json',
