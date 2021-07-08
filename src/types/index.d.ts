@@ -1,3 +1,5 @@
+import { Dispatch } from "react"
+
 interface Todo {
     id:any,
     title:string,
@@ -7,8 +9,10 @@ interface Tag {
     id:any,
     name:string
 }
+type Context = {state:State, dispatch: Dispatch<Action>}
 interface State {
-    todos : Todo[]
+    todos : Todo[],
+    tags: Tag[]
 }
 
 type Action = 

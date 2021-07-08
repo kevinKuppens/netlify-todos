@@ -7,7 +7,7 @@ const TodoList = () => {
     const { state, dispatch } = useContext(storeContext);
 
     useEffect(() => {
-        dispatch({ type: 'FETCHTODOS' })
+        dispatch({ type: 'FETCHTODOS', payload: {} })
     }, [])
 
     return (
