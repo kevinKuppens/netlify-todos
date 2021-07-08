@@ -1,0 +1,40 @@
+{
+  "tags": [
+    {
+      "id": 1,
+      "name": "work"
+    },
+    {
+      "id": 2,
+      "name": "pleasure"
+    }
+  ],
+  "todos": [
+    {
+      "title": "setup beers",
+      "id": 1,
+      "tagsId": 2
+    },
+    {
+      "title": "setup chips",
+      "id": 2,
+      "tagsId": 1
+    },
+    {
+      "title": "setup films",
+      "id": 3,
+      "tagsId": 1
+    },
+    {
+      "title": "make cool websites",
+      "id": 4,
+      "tagsId": 2
+    },
+    {
+      "title": "See good movies",
+      "tagsId": 2,
+      "id": 5
+    }
+  ],
+  "users": []
+}
